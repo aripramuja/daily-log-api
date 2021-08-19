@@ -124,13 +124,11 @@ class SubPekerjaanController extends Controller
 
     public function getValidSubPekerjaan($id){
         $data = array();
-        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($id);
-        foreach($pekerjaans as &$pekerjaan) {
-            $subPekerjaans = $this->subPekerjaanRepository->getValidSubPekerjaan($pekerjaan->id);
+            $subPekerjaans = $this->subPekerjaanRepository->getValidSubPekerjaan($id);
             foreach($subPekerjaans as $subPekerjaan) {
                 $data[] = $subPekerjaan;
             }
-        }
+
 
         return response([
             'success' => true,
@@ -152,6 +150,30 @@ class SubPekerjaanController extends Controller
             'success' => true,
             'message' => 'List SubPekerjaan submit',
             'data' => $data
+        ], 200);
+    }
+
+    public function getValidSubPekerjaanCount($id){
+        $data = 0;
+        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($id);
+        foreach($pekerjaans as &$pekerjaan) {
+            $subPekerjaans = $this->subPekerjaanRepository->getValidSubPekerjaanCount($pekerjaan->id);
+            $data += $subPekerjaans;
+        }
+
+        return response([
+            'success' => true,
+            'message' => 'List SubPekerjaan valid',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getDataTotalDurasiByTanggal($dateFrom, $dateTo) {
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiByTanggal($dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $tanggal
         ], 200);
     }
 }

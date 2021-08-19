@@ -100,4 +100,13 @@ class PekerjaanController extends Controller
             'data' => $pekerjaans
         ], 200);
     }
+
+    public function getPekerjaanByUserIdAndTanggal($id, $dateFrom, $dateTo) {
+        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUserAndTanggal($id, $dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'List Pekerjaan form '. $dateFrom .' to ' .$dateTo,
+            'data' => $pekerjaans
+        ], 200);
+    }
 }

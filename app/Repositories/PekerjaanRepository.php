@@ -33,4 +33,9 @@ class PekerjaanRepository {
     public function getPekerjaanByIdUser($id){
         return Pekerjaan::where('id_user', $id)->get();
     }
+
+    public function getPekerjaanByIdUserAndTanggal($id, $dateFrom, $dateTo){
+        return Pekerjaan::where('id_user', $id)->
+            whereBetween('tanggal', [$dateFrom, $dateTo])->get();
+    }
 }

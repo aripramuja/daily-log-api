@@ -52,4 +52,13 @@ class SubPekerjaanRepository {
         return SubPekerjaan::where('status', 'valid')->
             where('id_pekerjaan', $id_pekerjaan)->get();
     }
+
+    public function getValidSubPekerjaanCount($id_pekerjaan) {
+        return SubPekerjaan::where('status', 'valid')->
+            where('id_pekerjaan', $id_pekerjaan)->count();
+    }
+
+    public function getDataTotalDurasiByTanggal($dateFrom, $dateTo) {
+        return SubPekerjaan::whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, tanggal")->groupBy('tanggal')->get();
+    }
 }

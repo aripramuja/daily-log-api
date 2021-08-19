@@ -35,6 +35,7 @@ Route::get('pekerjaan/{id?}', [PekerjaanController::class, 'show']);
 Route::post('pekerjaan/update', [PekerjaanController::class, 'update']);
 Route::delete('pekerjaan/{id?}', [PekerjaanController::class, 'destroy']);
 Route::get('pekerjaan/pengguna/{id?}', [PekerjaanController::class, 'getPekerjaanByIdUser']);
+Route::get('pekerjaan/pengguna/{id?}/tanggal/{dateFrom?}/{dateTo?}', [PekerjaanController::class, 'getPekerjaanByUserIdAndTanggal']);
 
 Route::post('subpekerjaan/store', [SubPekerjaanController::class, 'store']);
 Route::get('subpekerjaan', [SubPekerjaanController::class, 'index']);
@@ -45,3 +46,5 @@ Route::get('pengguna/{id?}/subpekerjaan/submit', [SubPekerjaanController::class,
 Route::get('pengguna/{id?}/subpekerjaan/reject', [SubPekerjaanController::class, 'getRejectedSubPekerjaan']);
 Route::get('pengguna/{id?}/subpekerjaan/valid', [SubPekerjaanController::class, 'getValidSubPekerjaan']);
 Route::get('pengguna/{id?}/pekerjaan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedSubPekerjaanByIdPengguna']);
+Route::get('pengguna/{id?}/subpekerjaan/valid/count', [SubPekerjaanController::class, 'getValidSubPekerjaanCount']);
+Route::get('tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiByTanggal']);
