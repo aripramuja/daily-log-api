@@ -18,5 +18,6 @@ class SubPekerjaan extends Model
         'status',
         'saran',
         'id_pekerjaan',
+        'id_user'
     ];
 }

@@ -19,7 +19,8 @@ class SubPekerjaanRepository {
             'tanggal' => $data->tanggal,
             'status' => $data->status,
             'saran' => $data->saran,
-            'id_pekerjaan' => $data->id_pekerjaan
+            'id_pekerjaan' => $data->id_pekerjaan,
+            'id_user' => $data->id_user
         ]);
     }
 
@@ -30,7 +31,8 @@ class SubPekerjaanRepository {
             'tanggal' => $data->tanggal,
             'status' => $data->status,
             'saran' => $data->saran,
-            'id_pekerjaan' => $data->id_pekerjaan
+            'id_pekerjaan' => $data->id_pekerjaan,
+            'id_user' => $data->id_user
         ]);
     }
 
@@ -58,7 +60,9 @@ class SubPekerjaanRepository {
             where('id_pekerjaan', $id_pekerjaan)->count();
     }
 
-    public function getDataTotalDurasiByTanggal($dateFrom, $dateTo) {
-        return SubPekerjaan::whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, tanggal")->groupBy('tanggal')->get();
+    public function getDataTotalDurasiByTanggal($idUser, $dateFrom, $dateTo) {
+        return SubPekerjaan::where('id_user', $idUser)->where('status', 'valid')->
+            whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, tanggal")->
+            groupBy('tanggal')->get();
     }
 }

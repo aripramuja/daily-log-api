@@ -15,14 +15,16 @@ class PekerjaanRepository {
     public function createPekerjaan($data) {
         return Pekerjaan::create([
             'nama' => $data->nama,
-            'id_user' => $data->id_user
+            'id_user' => $data->id_user,
+            'tanggal' => $data->tanggal
         ]);
     }
 
     public function updatePekerjaan($data) {
         return Pekerjaan::find($data->id)->update([
             'nama' => $data->nama,
-            'id_user' => $data->id_user
+            'id_user' => $data->id_user,
+            'tanggal' => $data->tanggal
         ]);
     }
 

@@ -14,6 +14,7 @@ class Pekerjaan extends Model
     protected $fillable = [
         'nama',
         'id_user',
+        'tanggal'
     ];
 
 }

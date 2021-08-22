@@ -168,8 +168,8 @@ class SubPekerjaanController extends Controller
         ], 200);
     }
 
-    public function getDataTotalDurasiByTanggal($dateFrom, $dateTo) {
-        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiByTanggal($dateFrom, $dateTo);
+    public function getDataTotalDurasiByTanggal($idPengguna, $dateFrom, $dateTo) {
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiByTanggal($idPengguna, $dateFrom, $dateTo);
         return response([
             'success' => true,
             'message' => 'tanggal',
