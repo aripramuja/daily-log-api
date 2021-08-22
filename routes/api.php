@@ -46,5 +46,5 @@ Route::get('pengguna/{id?}/subpekerjaan/submit', [SubPekerjaanController::class,
 Route::get('pengguna/{id?}/subpekerjaan/reject', [SubPekerjaanController::class, 'getRejectedSubPekerjaan']);
 Route::get('pengguna/{id?}/subpekerjaan/valid', [SubPekerjaanController::class, 'getValidSubPekerjaan']);
 Route::get('pengguna/{id?}/pekerjaan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedSubPekerjaanByIdPengguna']);
-Route::get('pengguna/{id?}/subpekerjaan/valid/count', [SubPekerjaanController::class, 'getValidSubPekerjaanCount']);
+Route::get('pengguna/{id?}/subpekerjaan/{dateFrom?}/{dateTo?}/valid/count', [SubPekerjaanController::class, 'getValidSubPekerjaanCount']);
 Route::get('chart/pengguna/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiByTanggal']);

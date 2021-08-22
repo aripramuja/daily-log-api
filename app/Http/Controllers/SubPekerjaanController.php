@@ -153,9 +153,9 @@ class SubPekerjaanController extends Controller
         ], 200);
     }
 
-    public function getValidSubPekerjaanCount($id){
+    public function getValidSubPekerjaanCount($id, $dateFrom, $dateTo){
         $data = 0;
-        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($id);
+        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUserAndTanggal($id, $dateFrom, $dateTo);
         foreach($pekerjaans as &$pekerjaan) {
             $subPekerjaans = $this->subPekerjaanRepository->getValidSubPekerjaanCount($pekerjaan->id);
             $data += $subPekerjaans;
