@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\SubPekerjaanController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\PresenceController;
+use App\Http\Controllers\CityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +51,22 @@ Route::get('pengguna/{id?}/subpekerjaan/valid', [SubPekerjaanController::class, 
 Route::get('pengguna/{id?}/pekerjaan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedSubPekerjaanByIdPengguna']);
 Route::get('pengguna/{id?}/subpekerjaan/{dateFrom?}/{dateTo?}/valid/count', [SubPekerjaanController::class, 'getValidSubPekerjaanCount']);
 Route::get('chart/pengguna/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiByTanggal']);
+
+Route::post('position/store', [PositionController::class, 'store']);
+Route::get('position', [PositionController::class, 'index']);
+Route::get('position/{id?}', [PositionController::class, 'show']);
+Route::post('position/update', [PositionController::class, 'update']);
+Route::delete('position/{id?}', [PositionController::class, 'destroy']);
+
+Route::post('presence/store', [PresenceController::class, 'store']);
+Route::get('presence', [PresenceController::class, 'index']);
+Route::get('presence/{id?}', [PresenceController::class, 'show']);
+Route::post('presence/update', [PresenceController::class, 'update']);
+Route::delete('presence/{id?}', [PresenceController::class, 'destroy']);
+Route::get('presence/{id_user?}/{date?}', [PresenceController::class, 'getTodayPresenceByIdUser']);
+
+Route::post('city/store', [CityController::class, 'store']);
+Route::get('city', [CityController::class, 'index']);
+Route::get('city/{id?}', [CityController::class, 'show']);
+Route::post('city/update', [CityController::class, 'update']);
+Route::delete('city/{id?}', [CityController::class, 'destroy']);
