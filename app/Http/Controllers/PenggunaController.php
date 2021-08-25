@@ -117,14 +117,10 @@ class PenggunaController extends Controller
       }
     }
 
-    public function getPenggunaStaff() {
+    public function getPenggunaStaff($id_position) {
         $data = array();
-        $penggunas = $this->penggunaRepository->getPenggunaByJabatan('staff');
+        $penggunas = $this->penggunaRepository->getPenggunaStaff($id_position);
 
-        foreach($penggunas as $pengguna){
-            unset($pengguna['password']);
-            $data[] = $pengguna;
-        }
 
         if($data) {
             return response([
@@ -136,6 +132,23 @@ class PenggunaController extends Controller
             return response([
 				'success' => false,
 				'message' => 'No staff data',
+			], 401);
+        }
+    }
+
+    public function getPenggunaByIdPosition($id_position) {
+        $pengguna = $this->penggunaRepository->getPenggunaByPositionId($id_position);
+
+        if($pengguna) {
+            return response([
+                'success' => true,
+                'message' => 'pengguna with position'. $id_position,
+                'data' => $pengguna
+            ],200);
+        } else {
+            return response([
+				'success' => false,
+				'message' => 'pengguna with id position '. $id_position . ' not found',
 			], 401);
         }
     }

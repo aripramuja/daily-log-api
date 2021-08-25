@@ -39,4 +39,14 @@ class PenggunaRepository {
     public function getPenggunaByJabatan($jabatan) {
         return Pengguna::where('jabatan', $jabatan)->get();
     }
+
+    public function getPenggunaByPositionId($id_position) {
+        return Pengguna::where('position_id', $id_position)->first();
+    }
+
+    public function getPenggunaStaff($id_position) {
+        return Pengguna::join('position', 'position.id', '=', 'user.position_id')->
+            select('user.id', 'username', 'jabatan', 'jabatan', 'position_id')->
+            where('position.parent_id', $id_position)->get();
+    }
 }
