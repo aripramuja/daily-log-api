@@ -52,6 +52,7 @@ Route::get('pengguna/{id?}/subpekerjaan/valid', [SubPekerjaanController::class, 
 Route::get('pengguna/{id?}/pekerjaan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedSubPekerjaanByIdPengguna']);
 Route::get('pengguna/{id?}/subpekerjaan/{dateFrom?}/{dateTo?}/valid/count', [SubPekerjaanController::class, 'getValidSubPekerjaanCount']);
 Route::get('chart/pengguna/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiByTanggal']);
+Route::get('chart/tim/{idPosition?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiTimByTanggal']);
 
 Route::post('position/store', [PositionController::class, 'store']);
 Route::get('position', [PositionController::class, 'index']);

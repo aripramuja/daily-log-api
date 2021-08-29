@@ -122,11 +122,11 @@ class PenggunaController extends Controller
         $penggunas = $this->penggunaRepository->getPenggunaStaff($id_position);
 
 
-        if($data) {
+        if($penggunas) {
             return response([
                 'success' => true,
                 'message' => 'List Staff',
-                'data' => $data
+                'data' => $penggunas
             ],200);
         } else {
             return response([

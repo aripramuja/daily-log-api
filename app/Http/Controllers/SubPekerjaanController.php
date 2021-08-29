@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\PekerjaanRepository;
+use App\Repositories\PenggunaRepository;
 use App\Repositories\SubPekerjaanRepository;
 use Illuminate\Http\Request;
 
@@ -10,13 +11,16 @@ class SubPekerjaanController extends Controller
 {
     protected SubPekerjaanRepository $subPekerjaanRepository;
     protected PekerjaanRepository $pekerjaanRepository;
+    protected PenggunaRepository $penggunaRepository;
 
     public function __construct(
         SubPekerjaanRepository $subPekerjaanRepository,
-        PekerjaanRepository $pekerjaanRepository
+        PekerjaanRepository $pekerjaanRepository,
+        PenggunaRepository $penggunaRepository
     ){
         $this->subPekerjaanRepository = $subPekerjaanRepository;
         $this->pekerjaanRepository = $pekerjaanRepository;
+        $this->penggunaRepository = $penggunaRepository;
     }
 
     public function index() {
@@ -170,6 +174,21 @@ class SubPekerjaanController extends Controller
 
     public function getDataTotalDurasiByTanggal($idPengguna, $dateFrom, $dateTo) {
         $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiByTanggal($idPengguna, $dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $tanggal
+        ], 200);
+    }
+
+    public function getDataTotalDurasiTimByTanggal($idPosition, $dateFrom, $dateTo) {
+        $id_tim = array();
+        $tims = $this->penggunaRepository->getPenggunaStaff($idPosition);
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTimByTanggal($id_tim, $dateFrom, $dateTo);
         return response([
             'success' => true,
             'message' => 'tanggal',
