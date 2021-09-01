@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArrivalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenggunaController;
@@ -72,3 +73,6 @@ Route::get('city', [CityController::class, 'index']);
 Route::get('city/{id?}', [CityController::class, 'show']);
 Route::post('city/update', [CityController::class, 'update']);
 Route::delete('city/{id?}', [CityController::class, 'destroy']);
+
+Route::get('arrival/checkin', [ArrivalController::class, 'checkIn']);
+Route::get('arrival/checkout', [ArrivalController::class, 'checkOut']);

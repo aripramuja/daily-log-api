@@ -76,4 +76,14 @@ class SubPekerjaanRepository {
         return SubPekerjaan::where('status', 'valid')->
             where('id_pekerjaan', $id_pekerjaan)->whereBetween('tanggal', [$dateFrom, $dateTo])->count();
     }
+
+    public function getSubmitSubPekerjaanCount($id_pekerjaan) {
+        return SubPekerjaan::where('status', 'submit')->
+            where('id_pekerjaan', $id_pekerjaan)->count();
+    }
+
+    public function getRejectSubPekerjaanCount($id_pekerjaan) {
+        return SubPekerjaan::where('status', 'reject')->
+            where('id_pekerjaan', $id_pekerjaan)->count();
+    }
 }
