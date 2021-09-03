@@ -15,5 +15,7 @@ class Arrival extends Model
         'tanggal',
         'status',
         'username',
+        'latitude',
+        'longitude'
     ];
 }

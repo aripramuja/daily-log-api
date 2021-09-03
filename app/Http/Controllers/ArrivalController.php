@@ -96,12 +96,14 @@ class ArrivalController extends Controller
         }
     }
 
-    public function checkIn($username) {
+    public function checkIn($username, $latitude, $longitude) {
         $date = Carbon::now("Asia/Jakarta")->format("Y-m-d");
         $data = array();
         $data['tanggal'] = $date;
         $data['status'] = 'check in';
         $data['username'] = $username;
+        $data['latitude'] = $latitude;
+        $data['longitude'] = $longitude;
 
         $arrival = $this->arrivalRepository->createArrival($data);
         if($arrival) {
@@ -117,12 +119,14 @@ class ArrivalController extends Controller
         }
     }
 
-    public function checkOut($username) {
+    public function checkOut($username, $latitude, $longitude) {
         $date = Carbon::now("Asia/Jakarta")->format("Y-m-d");
         $data = array();
         $data['tanggal'] = $date;
         $data['status'] = 'check out';
         $data['username'] = $username;
+        $data['latitude'] = $latitude;
+        $data['longitude'] = $longitude;
 
         $arrival = $this->arrivalRepository->createArrival($data);
         if($arrival) {

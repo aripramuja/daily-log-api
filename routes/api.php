@@ -74,5 +74,5 @@ Route::get('city/{id?}', [CityController::class, 'show']);
 Route::post('city/update', [CityController::class, 'update']);
 Route::delete('city/{id?}', [CityController::class, 'destroy']);
 
-Route::get('arrival/checkin/{username?}', [ArrivalController::class, 'checkIn']);
-Route::get('arrival/checkout/{username?}', [ArrivalController::class, 'checkOut']);
+Route::get('arrival/checkin/{username?}/{latitude?}/{longitude?}', [ArrivalController::class, 'checkIn']);
+Route::get('arrival/checkout/{username?}/{latitude?}/{longitude?}', [ArrivalController::class, 'checkOut']);

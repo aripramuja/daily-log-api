@@ -16,7 +16,9 @@ class ArrivalRepository {
         return Arrival::create([
            'tanggal' => $data["tanggal"],
            'status' => $data["status"],
-           'username' => $data["username"]
+           'username' => $data["username"],
+           'latutide' => $data["latitude"],
+           'longitude' => $data["longitude"]
         ]);
     }
 
@@ -24,7 +26,9 @@ class ArrivalRepository {
         return Arrival::find($data->id)->update([
             'tanggal' => $data["tanggal"],
             'status' => $data["status"],
-            'username' => $data["username"]
+            'username' => $data["username"],
+            'latutide' => $data["latitude"],
+            'longitude' => $data["longitude"]
         ]);
     }
 
