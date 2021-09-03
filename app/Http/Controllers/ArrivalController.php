@@ -96,53 +96,35 @@ class ArrivalController extends Controller
         }
     }
 
-    public function checkIn() {
+    public function checkIn($username) {
         $date = Carbon::now("Asia/Jakarta")->format("Y-m-d");
         $data = array();
-        $arrival = $this->arrivalRepository->getArrivalByTanggal($date);
-        if($arrival->isEmpty()) {
+        $data['tanggal'] = $date;
+        $data['status'] = 'check in';
+        $data['username'] = $username;
 
-            $data['tanggal'] = $date;
-            $data['check_in'] = 1;
-            $data['check_out'] = 0;
-
-            $this->arrivalRepository->createArrival($data);
-            if($arrival) {
-                return response([
-                    'success' => true,
-                    'message' => 'Check in berhasil'
-                ],200);
-            } else {
-                return response([
-                    'success' => false,
-                    'message' => 'Check in gagal',
-                ], 401);
-            }
+        $arrival = $this->arrivalRepository->createArrival($data);
+        if($arrival) {
+            return response([
+                'success' => true,
+                'message' => 'Check in berhasil'
+            ],200);
         } else {
-            $arrival[0]->check_in = $arrival[0]->check_in + 1;
-
-            $this->arrivalRepository->updateArrival($arrival[0]);
-            if($arrival) {
-                return response([
-                    'success' => true,
-                    'message' => 'Check in berhasil'
-                ],200);
-            } else {
-                return response([
-                    'success' => false,
-                    'message' => 'Check in gagal',
-                ], 401);
-            }
+            return response([
+                'success' => false,
+                'message' => 'Check in gagal',
+            ], 401);
         }
     }
 
-    public function checkOut() {
+    public function checkOut($username) {
         $date = Carbon::now("Asia/Jakarta")->format("Y-m-d");
-        $arrival = $this->arrivalRepository->getArrivalByTanggal($date);
+        $data = array();
+        $data['tanggal'] = $date;
+        $data['status'] = 'check out';
+        $data['username'] = $username;
 
-        $arrival[0]->check_out = $arrival[0]->check_out + 1;
-
-        $this->arrivalRepository->updateArrival($arrival[0]);
+        $arrival = $this->arrivalRepository->createArrival($data);
         if($arrival) {
             return response([
                 'success' => true,

@@ -13,7 +13,7 @@ class Arrival extends Model
 
     protected $fillable = [
         'tanggal',
-        'check_in',
-        'check_out',
+        'status',
+        'username',
     ];
 }

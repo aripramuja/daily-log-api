@@ -15,16 +15,16 @@ class ArrivalRepository {
     public function createArrival($data) {
         return Arrival::create([
            'tanggal' => $data["tanggal"],
-           'check_in' => $data["check_in"],
-           'check_out' => $data["check_out"]
+           'status' => $data["status"],
+           'username' => $data["username"]
         ]);
     }
 
     public function updateArrival($data) {
         return Arrival::find($data->id)->update([
             'tanggal' => $data["tanggal"],
-            'check_in' => $data["check_in"],
-            'check_out' => $data["check_out"]
+            'status' => $data["status"],
+            'username' => $data["username"]
         ]);
     }
 
