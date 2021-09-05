@@ -17,7 +17,7 @@ class ArrivalRepository {
            'tanggal' => $data["tanggal"],
            'status' => $data["status"],
            'username' => $data["username"],
-           'latutide' => $data["latitude"],
+           'latitude' => $data["latitude"],
            'longitude' => $data["longitude"]
         ]);
     }
@@ -27,7 +27,7 @@ class ArrivalRepository {
             'tanggal' => $data["tanggal"],
             'status' => $data["status"],
             'username' => $data["username"],
-            'latutide' => $data["latitude"],
+            'latitude' => $data["latitude"],
             'longitude' => $data["longitude"]
         ]);
     }
