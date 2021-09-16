@@ -105,11 +105,19 @@ class ArrivalController extends Controller
         $data['latitude'] = $latitude;
         $data['longitude'] = $longitude;
 
-        $arrival = $this->arrivalRepository->createArrival($data);
+        $arrival = $this->arrivalRepository->getArrivalByUsernameAndTanggal($username, $date);
+        if($arrival) {
+            $data['status'] = 'check out';
+            $data['id'] = $arrival->id;
+            $arrival = $this->arrivalRepository->updateArrival($data);
+        } else {
+            $arrival = $this->arrivalRepository->createArrival($data);
+        }
+
         if($arrival) {
             return response([
                 'success' => true,
-                'message' => 'Check in berhasil'
+                'message' => $data['status'].' berhasil'
             ],200);
         } else {
             return response([

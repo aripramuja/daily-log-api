@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PenggunaRepository;
 use Illuminate\Http\Request;
 use App\Repositories\PresenceRepository;
 
@@ -9,10 +10,12 @@ class PresenceController extends Controller
 {
 
     protected PresenceRepository $presenceRepository;
+    protected PenggunaRepository $penggunaRepository;
 
-    public function __construct(PresenceRepository $presenceRepository)
+    public function __construct(PresenceRepository $presenceRepository, PenggunaRepository $penggunaRepository)
     {
         $this->presenceRepository = $presenceRepository;
+        $this->penggunaRepository = $penggunaRepository;
     }
 
     public function index() {
@@ -105,6 +108,28 @@ class PresenceController extends Controller
             return response([
 				'success' => false,
 				'message' => 'presence with id '. $id_user . ' not found',
+			], 401);
+        }
+    }
+
+    public function getDataPresenceTim($id_position ,$dateFrom, $dateTo) {
+        $presences = $this->presenceRepository->getDataPresenceByTanggal($dateFrom, $dateTo);
+        $num_staff = $this->penggunaRepository->getPenggunaStaff($id_position)->count();
+
+        foreach($presences as $presence) {
+            $presence['tidak_hadir'] = $num_staff - $presence['hadir'];
+        }
+
+        if($presences) {
+            return response([
+                'success' => true,
+                'message' => 'presence '. $dateFrom . ' to '. $dateTo,
+                'data' => $presences
+            ],200);
+        } else {
+            return response([
+				'success' => false,
+				'message' => 'not found',
 			], 401);
         }
     }

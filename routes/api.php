@@ -9,6 +9,7 @@ use App\Http\Controllers\SubPekerjaanController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,7 @@ Route::get('presence/{id?}', [PresenceController::class, 'show']);
 Route::post('presence/update', [PresenceController::class, 'update']);
 Route::delete('presence/{id?}', [PresenceController::class, 'destroy']);
 Route::get('presence/{id_user?}/{date?}', [PresenceController::class, 'getTodayPresenceByIdUser']);
+Route::get('presence/tim/{id_position?}/{dateFrom?}/{dateTo?}', [PresenceController::class, 'getDataPresenceTim']);
 
 Route::post('city/store', [CityController::class, 'store']);
 Route::get('city', [CityController::class, 'index']);
@@ -76,3 +78,14 @@ Route::delete('city/{id?}', [CityController::class, 'destroy']);
 
 Route::get('arrival/checkin/{username?}/{latitude?}/{longitude?}', [ArrivalController::class, 'checkIn']);
 Route::get('arrival/checkout/{username?}/{latitude?}/{longitude?}', [ArrivalController::class, 'checkOut']);
+
+Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedPersetujuan']);
+Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/reject', [SubPekerjaanController::class, 'getRejectedPersetujuan']);
+
+Route::post('notification/store', [NotificationController::class, 'store']);
+Route::get('notification', [NotificationController::class, 'index']);
+Route::get('notification/{id?}', [NotificationController::class, 'show']);
+Route::post('notification/update', [NotificationController::class, 'update']);
+Route::delete('notification/{id?}', [NotificationController::class, 'destroy']);
+Route::get('notification/pengguna/{id?}', [NotificationController::class, 'getNotificationByReceiverId']);
+Route::get('notification/{id?}/read', [NotificationController::class, 'updateNotificationRead']);

@@ -23,7 +23,7 @@ class ArrivalRepository {
     }
 
     public function updateArrival($data) {
-        return Arrival::find($data->id)->update([
+        return Arrival::find($data["id"])->update([
             'tanggal' => $data["tanggal"],
             'status' => $data["status"],
             'username' => $data["username"],
@@ -36,7 +36,8 @@ class ArrivalRepository {
         return Arrival::find($id)->delete();
     }
 
-    public function getArrivalByTanggal($date) {
-        return Arrival::where('tanggal', $date)->get();
+    public function getArrivalByUsernameAndTanggal($username, $date) {
+        return Arrival::where('tanggal', $date)->
+            where('username', $username)->first();
     }
 }

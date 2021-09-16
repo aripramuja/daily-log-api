@@ -195,4 +195,38 @@ class SubPekerjaanController extends Controller
             'data' => $tanggal
         ], 200);
     }
+
+    public function getSubmittedPersetujuan($idUser) {
+        $data = array();
+        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($idUser);
+        foreach($pekerjaans as $pekerjaan) {
+            $subPekerjaans = $this->subPekerjaanRepository->getSubmitSubPekerjaan($pekerjaan->id);
+            if($subPekerjaans->count() > 0 ) {
+                $pekerjaan['subPekerjaan'] = $subPekerjaans;
+                $data[] = $pekerjaan;
+            }
+        }
+        return response([
+            'success' => true,
+            'message' => 'List SubPekerjaan submit',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getRejectedPersetujuan($idUser) {
+        $data = array();
+        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($idUser);
+        foreach($pekerjaans as $pekerjaan) {
+            $subPekerjaans = $this->subPekerjaanRepository->getRejectSubPekerjaan($pekerjaan->id);
+            if($subPekerjaans->count() > 0 ) {
+                $pekerjaan['subPekerjaan'] = $subPekerjaans;
+                $data[] = $pekerjaan;
+            }
+        }
+        return response([
+            'success' => true,
+            'message' => 'List SubPekerjaan reject',
+            'data' => $data
+        ], 200);
+    }
 }
