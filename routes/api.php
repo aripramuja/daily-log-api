@@ -89,3 +89,4 @@ Route::post('notification/update', [NotificationController::class, 'update']);
 Route::delete('notification/{id?}', [NotificationController::class, 'destroy']);
 Route::get('notification/pengguna/{id?}', [NotificationController::class, 'getNotificationByReceiverId']);
 Route::get('notification/{id?}/read', [NotificationController::class, 'updateNotificationRead']);
+Route::get('notification/pengguna/{id?}/count', [NotificationController::class, 'getNotificationUnreadByReceiverId']);

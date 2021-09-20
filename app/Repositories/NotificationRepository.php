@@ -48,4 +48,8 @@ class NotificationRepository {
             'is_read' => 1,
         ]);
     }
+
+    public function getCountReadNotificationByReceiverId($id_user) {
+        return Notification::where('receiver_id', $id_user)->where('is_read', 0)->count();
+    }
 }

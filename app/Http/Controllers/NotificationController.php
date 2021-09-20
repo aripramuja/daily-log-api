@@ -123,4 +123,21 @@ class NotificationController extends Controller
 			], 401);
         }
     }
+    public function getNotificationUnreadByReceiverId($id_user) {
+        $notification = $this->notificationRepository->getCountReadNotificationByReceiverId($id_user);
+
+        if($notification) {
+            return response([
+                'success' => true,
+                'message' => 'Count notification '. $id_user,
+                'data' => $notification
+            ],200);
+        } else {
+            return response([
+				'success' => false,
+				'message' => 'notification with receiver id '. $id_user . ' not found',
+			], 401);
+        }
+    }
+
 }
