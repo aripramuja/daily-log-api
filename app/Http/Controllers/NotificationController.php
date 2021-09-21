@@ -136,6 +136,7 @@ class NotificationController extends Controller
             return response([
 				'success' => false,
 				'message' => 'notification with receiver id '. $id_user . ' not found',
+                'data' => $notification
 			], 401);
         }
     }
