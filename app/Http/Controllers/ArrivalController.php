@@ -98,19 +98,18 @@ class ArrivalController extends Controller
 
     public function checkIn($username, $latitude, $longitude) {
         $date = Carbon::now("Asia/Jakarta")->format("Y-m-d");
+        $time = Carbon::now("Asia/Jakarta")->format("H:i:s");
         $data = array();
         $data['tanggal'] = $date;
         $data['status'] = 'check in';
         $data['username'] = $username;
         $data['latitude'] = $latitude;
         $data['longitude'] = $longitude;
+        $data['check_in_time'] = $time;
+        $data['check_out_time'] = null;
 
         $arrival = $this->arrivalRepository->getArrivalByUsernameAndTanggal($username, $date);
-        if($arrival) {
-            $data['status'] = 'check out';
-            $data['id'] = $arrival->id;
-            $arrival = $this->arrivalRepository->updateArrival($data);
-        } else {
+        if(!$arrival) {
             $arrival = $this->arrivalRepository->createArrival($data);
         }
 
@@ -127,16 +126,15 @@ class ArrivalController extends Controller
         }
     }
 
-    public function checkOut($username, $latitude, $longitude) {
+    public function checkOut($username) {
         $date = Carbon::now("Asia/Jakarta")->format("Y-m-d");
-        $data = array();
-        $data['tanggal'] = $date;
-        $data['status'] = 'check out';
-        $data['username'] = $username;
-        $data['latitude'] = $latitude;
-        $data['longitude'] = $longitude;
+        $time = Carbon::now("Asia/Jakarta")->format("H:i:s");
 
-        $arrival = $this->arrivalRepository->createArrival($data);
+        $arrival = $this->arrivalRepository->getArrivalByUsernameAndTanggal($username, $date);
+        $arrival->check_out_time = $time;
+        $arrival->status = 'check out';
+
+        $arrival = $this->arrivalRepository->updateArrival($arrival);
         if($arrival) {
             return response([
                 'success' => true,

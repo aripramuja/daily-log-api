@@ -77,7 +77,7 @@ Route::post('city/update', [CityController::class, 'update']);
 Route::delete('city/{id?}', [CityController::class, 'destroy']);
 
 Route::get('arrival/checkin/{username?}/{latitude?}/{longitude?}', [ArrivalController::class, 'checkIn']);
-Route::get('arrival/checkout/{username?}/{latitude?}/{longitude?}', [ArrivalController::class, 'checkOut']);
+Route::get('arrival/checkout/{username?}', [ArrivalController::class, 'checkOut']);
 
 Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedPersetujuan']);
 Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/reject', [SubPekerjaanController::class, 'getRejectedPersetujuan']);

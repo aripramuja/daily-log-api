@@ -16,6 +16,8 @@ class Arrival extends Model
         'status',
         'username',
         'latitude',
-        'longitude'
+        'longitude',
+        'check_in_time',
+        'check_out_time'
     ];
 }

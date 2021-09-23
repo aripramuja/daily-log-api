@@ -18,7 +18,9 @@ class ArrivalRepository {
            'status' => $data["status"],
            'username' => $data["username"],
            'latitude' => $data["latitude"],
-           'longitude' => $data["longitude"]
+           'longitude' => $data["longitude"],
+           'check_in_time' => $data["check_in_time"],
+            'check_out_time' => $data["check_out_time"]
         ]);
     }
 
@@ -28,7 +30,9 @@ class ArrivalRepository {
             'status' => $data["status"],
             'username' => $data["username"],
             'latitude' => $data["latitude"],
-            'longitude' => $data["longitude"]
+            'longitude' => $data["longitude"],
+            'check_in_time' => $data["check_in_time"],
+            'check_out_time' => $data["check_out_time"]
         ]);
     }
 
