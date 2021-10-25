@@ -62,11 +62,17 @@ class SubPekerjaanRepository {
 
     public function getDataTotalDurasiByTanggal($idUser, $dateFrom, $dateTo) {
         return SubPekerjaan::where('id_user', $idUser)->where('status', 'valid')->
-            whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, tanggal")->
-            groupBy('tanggal')->get();
+            whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, DATE(tanggal) as tanggal")->
+            groupBy(\DB::raw('DATE(tanggal)'))->get();
     }
 
     public function getDataTotalDurasiTimByTanggal($idUser, $dateFrom, $dateTo) {
+        return SubPekerjaan::whereIn('id_user', $idUser)->where('status', 'valid')->
+            whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, DATE(tanggal) as tanggal")->
+            groupBy(\DB::raw('DATE(tanggal)'))->get();
+    }
+
+    public function getDataTotalDurasiTim1Hari($idUser, $dateFrom, $dateTo) {
         return SubPekerjaan::whereIn('id_user', $idUser)->where('status', 'valid')->
             whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, tanggal")->
             groupBy('tanggal')->get();

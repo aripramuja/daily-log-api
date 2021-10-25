@@ -196,6 +196,21 @@ class SubPekerjaanController extends Controller
         ], 200);
     }
 
+    public function getDataTotalDurasiTim1Hari($idPosition, $dateFrom, $dateTo) {
+        $id_tim = array();
+        $tims = $this->penggunaRepository->getPenggunaStaff($idPosition);
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTim1Hari($id_tim, $dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $tanggal
+        ], 200);
+    }
+
     public function getSubmittedPersetujuan($idUser) {
         $data = array();
         $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($idUser);
