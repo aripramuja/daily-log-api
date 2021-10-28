@@ -187,7 +187,7 @@ class SubPekerjaanController extends Controller
         foreach($tims as $tim) {
             $id_tim[] = $tim->id;
         }
-
+        $dateTo = $dateTo . ' 23:59:59';
         $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTimByTanggal($id_tim, $dateFrom, $dateTo);
         return response([
             'success' => true,
@@ -202,7 +202,7 @@ class SubPekerjaanController extends Controller
         foreach($tims as $tim) {
             $id_tim[] = $tim->id;
         }
-
+        $dateTo = $dateTo . ' 23:59:59';
         $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTim1Hari($id_tim, $dateFrom, $dateTo);
         return response([
             'success' => true,

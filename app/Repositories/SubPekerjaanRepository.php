@@ -62,7 +62,7 @@ class SubPekerjaanRepository {
 
     public function getDataTotalDurasiByTanggal($idUser, $dateFrom, $dateTo) {
         return SubPekerjaan::where('id_user', $idUser)->where('status', 'valid')->
-            whereBetween('tanggal', [$dateFrom, $dateTo])->selectRaw("SUM(durasi) as durasi, DATE(tanggal) as tanggal")->
+            whereBetween('tanggal', [$dateFrom, $dateTo . ' 23:59:59'])->selectRaw("SUM(durasi) as durasi, DATE(tanggal) as tanggal")->
             groupBy(\DB::raw('DATE(tanggal)'))->get();
     }
 
@@ -80,7 +80,7 @@ class SubPekerjaanRepository {
 
     public function getValidSubPekerjaanCountByTanggsl($id_pekerjaan, $dateFrom, $dateTo) {
         return SubPekerjaan::where('status', 'valid')->
-            where('id_pekerjaan', $id_pekerjaan)->whereBetween('tanggal', [$dateFrom, $dateTo])->count();
+            where('id_pekerjaan', $id_pekerjaan)->whereBetween('tanggal', [$dateFrom, $dateTo . ' 23:59:59'])->count();
     }
 
     public function getSubmitSubPekerjaanCount($id_pekerjaan) {
