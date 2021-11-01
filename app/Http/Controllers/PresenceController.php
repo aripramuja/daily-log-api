@@ -133,4 +133,16 @@ class PresenceController extends Controller
 			], 401);
         }
     }
+
+    public function getPresenceUserByTanggal($id_user, $dateFrom, $dateTo) {
+        $presence = $this->presenceRepository->getPresenceUserByTanggal($id_user, $dateFrom, $dateTo);
+
+        if($presence) {
+            return response([
+                'success' => true,
+                'message' => 'presence '. $id_user . ' from '. $dateFrom . ' to '. $dateTo,
+                'data' => $presence
+            ],200);
+        }
+    }
 }

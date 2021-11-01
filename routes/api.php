@@ -70,6 +70,7 @@ Route::post('presence/update', [PresenceController::class, 'update']);
 Route::delete('presence/{id?}', [PresenceController::class, 'destroy']);
 Route::get('presence/{id_user?}/{date?}', [PresenceController::class, 'getTodayPresenceByIdUser']);
 Route::get('presence/tim/{id_position?}/{dateFrom?}/{dateTo?}', [PresenceController::class, 'getDataPresenceTim']);
+Route::get('presence/list/{id_user?}/{dateFrom?}/{dateTo?}', [PresenceController::class, 'getPresenceUserByTanggal']);
 
 Route::post('city/store', [CityController::class, 'store']);
 Route::get('city', [CityController::class, 'index']);
