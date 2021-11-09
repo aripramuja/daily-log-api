@@ -181,9 +181,9 @@ class SubPekerjaanController extends Controller
         ], 200);
     }
 
-    public function getDataTotalDurasiTimByTanggal($idPosition, $dateFrom, $dateTo) {
+    public function getDataTotalDurasiTimByTanggal($idUser, $dateFrom, $dateTo) {
         $id_tim = array();
-        $tims = $this->penggunaRepository->getPenggunaStaff($idPosition);
+        $tims = $this->penggunaRepository->getListStaff($idUser);
         foreach($tims as $tim) {
             $id_tim[] = $tim->id;
         }
@@ -196,9 +196,9 @@ class SubPekerjaanController extends Controller
         ], 200);
     }
 
-    public function getDataTotalDurasiTim1Hari($idPosition, $dateFrom, $dateTo) {
+    public function getDataTotalDurasiTim1Hari($idUser, $dateFrom, $dateTo) {
         $id_tim = array();
-        $tims = $this->penggunaRepository->getPenggunaStaff($idPosition);
+        $tims = $this->penggunaRepository->getListStaff($idUser);
         foreach($tims as $tim) {
             $id_tim[] = $tim->id;
         }
@@ -242,6 +242,38 @@ class SubPekerjaanController extends Controller
             'success' => true,
             'message' => 'List SubPekerjaan reject',
             'data' => $data
+        ], 200);
+    }
+
+    public function getDataTotalDurasiTimStaffByTanggal($idPosition, $idPengguna, $dateFrom, $dateTo) {
+        $id_tim = array();
+        $id_tim[] = $idPengguna;
+        $tims = $this->penggunaRepository->getListStaff($idPengguna);
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+        $dateTo = $dateTo . ' 23:59:59';
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTimByTanggal($id_tim, $dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $tanggal
+        ], 200);
+    }
+
+    public function getDataTotalDurasiTimStaff1Hari($idPosition, $idPengguna, $dateFrom, $dateTo) {
+        $id_tim = array();
+        $id_tim[] = $idPengguna;
+        $tims = $this->penggunaRepository->getListStaff($idPengguna);
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+        $dateTo = $dateTo . ' 23:59:59';
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTim1Hari($id_tim, $dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $tanggal
         ], 200);
     }
 }

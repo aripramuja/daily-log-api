@@ -54,8 +54,11 @@ Route::get('pengguna/{id?}/subpekerjaan/valid', [SubPekerjaanController::class, 
 Route::get('pengguna/{id?}/pekerjaan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedSubPekerjaanByIdPengguna']);
 Route::get('pengguna/{id?}/subpekerjaan/{dateFrom?}/{dateTo?}/valid/count', [SubPekerjaanController::class, 'getValidSubPekerjaanCount']);
 Route::get('chart/pengguna/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiByTanggal']);
-Route::get('chart/tim/{idPosition?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiTimByTanggal']);
-Route::get('chart/tim/{idPosition?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiTim1Hari']);
+Route::get('chart/tim/{idUser?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiTimByTanggal']);
+Route::get('chart/tim/{idUser?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiTim1Hari']);
+
+Route::get('chart/tim/{idPosition?}/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiTimStaffByTanggal']);
+Route::get('chart/tim/{idPosition?}/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiTimStaff1Hari']);
 
 Route::post('position/store', [PositionController::class, 'store']);
 Route::get('position', [PositionController::class, 'index']);
@@ -69,7 +72,7 @@ Route::get('presence/{id?}', [PresenceController::class, 'show']);
 Route::post('presence/update', [PresenceController::class, 'update']);
 Route::delete('presence/{id?}', [PresenceController::class, 'destroy']);
 Route::get('presence/{id_user?}/{date?}', [PresenceController::class, 'getTodayPresenceByIdUser']);
-Route::get('presence/tim/{id_position?}/{dateFrom?}/{dateTo?}', [PresenceController::class, 'getDataPresenceTim']);
+Route::get('presence/tim/{id_user?}/{dateFrom?}/{dateTo?}', [PresenceController::class, 'getDataPresenceTim']);
 Route::get('presence/list/{id_user?}/{dateFrom?}/{dateTo?}', [PresenceController::class, 'getPresenceUserByTanggal']);
 
 Route::post('city/store', [CityController::class, 'store']);

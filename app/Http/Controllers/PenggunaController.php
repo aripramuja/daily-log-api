@@ -119,7 +119,7 @@ class PenggunaController extends Controller
 
     public function getPenggunaStaff($id_position) {
         $data = array();
-        $penggunas = $this->penggunaRepository->getPenggunaStaff($id_position);
+        $penggunas = $this->penggunaRepository->getListStaff($id_position);
 
 
         if($penggunas) {

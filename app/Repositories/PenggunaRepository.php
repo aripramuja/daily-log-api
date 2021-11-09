@@ -44,9 +44,13 @@ class PenggunaRepository {
         return Pengguna::where('position_id', $id_position)->first();
     }
 
-    public function getPenggunaStaff($id_position) {
-        return Pengguna::join('position', 'position.id', '=', 'user.position_id')->
-            select('user.id', 'username', 'jabatan', 'jabatan', 'position_id')->
-            where('position.parent_id', $id_position)->get();
+    // public function getPenggunaStaff($id_position) {
+    //     return Pengguna::join('position', 'position.id', '=', 'user.position_id')->
+    //         select('user.id', 'username', 'jabatan', 'jabatan', 'position_id')->
+    //         where('position.parent_id', $id_position)->get();
+    // }
+
+    public function getListStaff($id_user) {
+        return Pengguna::where('atasan_id', $id_user)->get();
     }
 }

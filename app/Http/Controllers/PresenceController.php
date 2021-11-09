@@ -112,9 +112,9 @@ class PresenceController extends Controller
         }
     }
 
-    public function getDataPresenceTim($id_position ,$dateFrom, $dateTo) {
+    public function getDataPresenceTim($id_user ,$dateFrom, $dateTo) {
         $presences = $this->presenceRepository->getDataPresenceByTanggal($dateFrom, $dateTo);
-        $num_staff = $this->penggunaRepository->getPenggunaStaff($id_position)->count();
+        $num_staff = $this->penggunaRepository->getListStaff($id_user)->count();
 
         foreach($presences as $presence) {
             $presence['tidak_hadir'] = $num_staff - $presence['hadir'];
