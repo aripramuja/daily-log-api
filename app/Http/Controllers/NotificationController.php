@@ -36,7 +36,7 @@ class NotificationController extends Controller
             return response([
 				'success' => false,
 				'message' => 'Item gagal disimpan',
-			], 401);
+			], 200);
         }
     }
 
@@ -53,7 +53,7 @@ class NotificationController extends Controller
             return response([
 				'success' => false,
 				'message' => 'notification with id '. $id . ' not found',
-			], 401);
+			], 200);
         }
     }
 
@@ -70,7 +70,7 @@ class NotificationController extends Controller
             return response([
 				'success' => false,
 				'message' => 'Item gagal diupdate',
-			], 401);
+			], 200);
         }
     }
 
@@ -86,7 +86,7 @@ class NotificationController extends Controller
             return response([
 				'success' => false,
 				'message' => 'Item gagal dihapus',
-			], 401);
+			], 200);
         }
     }
 
@@ -103,7 +103,7 @@ class NotificationController extends Controller
             return response([
 				'success' => false,
 				'message' => 'notification with id '. $id_user . ' not found',
-			], 401);
+			], 200);
         }
     }
 
@@ -120,7 +120,7 @@ class NotificationController extends Controller
             return response([
 				'success' => false,
 				'message' => 'Item gagal diupdate',
-			], 401);
+			], 200);
         }
     }
     public function getNotificationUnreadByReceiverId($id_user) {
@@ -137,7 +137,7 @@ class NotificationController extends Controller
 				'success' => false,
 				'message' => 'notification with receiver id '. $id_user . ' not found',
                 'data' => $notification
-			], 401);
+			], 200);
         }
     }
 
