@@ -101,19 +101,21 @@ class PenggunaController extends Controller
             return response([
                 'success' => true,
                 'message' => 'Login berhasil',
-                'data' => $pengguna
+                'data' => [$pengguna]
             ],200);
           } else {
             return response([
                 'success' => false,
                 'message' => 'Password salah',
+                'data' => []
             ],200);
           }
       } else {
         return response([
             'success' => false,
-            'message' => 'username tidak ditemukan',
-        ], 401);
+            'message' => 'Username tidak ditemukan',
+            'data' => []
+        ], 200);
       }
     }
 
