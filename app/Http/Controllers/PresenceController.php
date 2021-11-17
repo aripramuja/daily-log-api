@@ -113,8 +113,13 @@ class PresenceController extends Controller
     }
 
     public function getDataPresenceTim($id_user ,$dateFrom, $dateTo) {
-        $presences = $this->presenceRepository->getDataPresenceByTanggal($dateFrom, $dateTo);
         $num_staff = $this->penggunaRepository->getListStaff($id_user)->count();
+        $tims = $this->penggunaRepository->getListStaff($id_user);
+        $id_tim = array();
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+        $presences = $this->presenceRepository->getDataPresenceTimByTanggal($id_tim ,$dateFrom, $dateTo);
 
         foreach($presences as $presence) {
             $presence['tidak_hadir'] = $num_staff - $presence['hadir'];
@@ -143,6 +148,34 @@ class PresenceController extends Controller
                 'message' => 'presence '. $id_user . ' from '. $dateFrom . ' to '. $dateTo,
                 'data' => $presence
             ],200);
+        }
+    }
+
+    public function getDataPresenceTimStaff($id_user ,$dateFrom, $dateTo) {
+        $num_staff = $this->penggunaRepository->getListStaff($id_user)->count() + 1;
+        $tims = $this->penggunaRepository->getListStaff($id_user);
+        $id_tim = array();
+        $id_tim[] = $id_user;
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+        $presences = $this->presenceRepository->getDataPresenceTimByTanggal($id_tim ,$dateFrom, $dateTo);
+
+        foreach($presences as $presence) {
+            $presence['tidak_hadir'] = $num_staff - $presence['hadir'];
+        }
+
+        if($presences) {
+            return response([
+                'success' => true,
+                'message' => 'presence '. $dateFrom . ' to '. $dateTo,
+                'data' => $presences
+            ],200);
+        } else {
+            return response([
+				'success' => false,
+				'message' => 'not found',
+			], 401);
         }
     }
 }

@@ -57,4 +57,8 @@ class PresenceRepository {
     public function getPresenceUserByTanggal($id_user, $dateFrom, $dateTo) {
         return Presence::whereBetween('date', [$dateFrom, $dateTo])->where('id_user', $id_user)->get();
     }
+
+    public function getDataPresenceTimByTanggal($id_user, $dateFrom, $dateTo) {
+        return Presence::whereIn('id_user', $id_user)->selectRaw('date, COUNT(*) as hadir')->whereBetween('date', [$dateFrom, $dateTo])->groupBy('date')->get();
+    }
 }
