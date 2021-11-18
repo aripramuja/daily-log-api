@@ -53,4 +53,14 @@ class PenggunaRepository {
     public function getListStaff($id_user) {
         return Pengguna::where('atasan_id', $id_user)->get();
     }
+
+    public function updateFoto($id_user, $path) {
+        return Pengguna::find($id_user)->update([
+            'foto' => $path
+        ]);
+    }
+
+    public function getFotoPengguna($id_user) {
+        return Pengguna::where('id',$id_user)->first();
+    }
 }

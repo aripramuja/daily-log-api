@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use App\Repositories\PenggunaRepository;
+use Illuminate\Support\Facades\Storage;
 
 class PenggunaController extends Controller
 {
@@ -152,6 +153,44 @@ class PenggunaController extends Controller
 				'success' => false,
 				'message' => 'pengguna with id position '. $id_position . ' not found',
 			], 401);
+        }
+    }
+
+    public function uploadFotoPengguna(Request $request) {
+        $path = Storage::putFile('public/foto', $request->file('foto'));
+        $path = substr($path,7);
+
+        $pengguna = $this->penggunaRepository->updateFoto($request->id,  $path);
+
+        if($pengguna) {
+            return response([
+                'success' => true,
+                'message' => 'upload foto berhasil',
+                'data' => $path
+            ], 200);
+        } else {
+            return response([
+                'success' => false,
+                'message' => 'upload foto gagal',
+                'data' => []
+            ], 200);
+        }
+    }
+
+    public function getFotoPengguna($id_user) {
+        $pengguna = $this->penggunaRepository->getFotoPengguna($id_user);
+        if($pengguna) {
+            return response([
+                'success' => true,
+                'message' => 'upload foto berhasil',
+                'data' => $pengguna->foto
+            ], 200);
+        } else {
+            return response([
+                'success' => false,
+                'message' => 'upload foto gagal',
+                'data' => []
+            ], 200);
         }
     }
 }

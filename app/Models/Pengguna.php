@@ -15,5 +15,9 @@ class Pengguna extends Model
         'username',
         'password',
         'jabatan',
+        'nip',
+        'position_id',
+        'atasan_id',
+        'foto'
     ];
 }

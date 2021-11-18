@@ -34,6 +34,8 @@ Route::delete('pengguna/{id?}', [PenggunaController::class, 'destroy']);
 Route::post('pengguna/login', [PenggunaController::class, 'login']);
 Route::get('pengguna/{id_position?}/list/staff', [PenggunaController::class, 'getPenggunaStaff']);
 Route::get('pengguna/position/{id_position?}', [PenggunaController::class, 'getPenggunaByIdPosition']);
+Route::post('pengguna/foto/upload', [PenggunaController::class, 'uploadFotoPengguna']);
+Route::get('pengguna/foto/{id_user?}', [PenggunaController::class, 'getFotoPengguna']);
 
 Route::post('pekerjaan/store', [PekerjaanController::class, 'store']);
 Route::get('pekerjaan', [PekerjaanController::class, 'index']);
