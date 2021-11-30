@@ -53,6 +53,8 @@ class NotificationRepository {
     }
 
     public function getCountReadNotificationByReceiverId($id_user) {
-        return Notification::where('receiver_id', $id_user)->where('is_read', 0)->count();
+        $date = Carbon::now("Asia/Jakarta")->format("Y-m-d");
+        $lastDate = Carbon::now("Asia/Jakarta")->subDays(30)->format("Y-m-d");
+        return Notification::where('receiver_id', $id_user)->whereBetween('notification.date', [$lastDate, $date])->where('is_read', 0)->count();
     }
 }
