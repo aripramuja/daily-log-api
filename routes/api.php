@@ -89,6 +89,7 @@ Route::get('arrival/checkout/{username?}', [ArrivalController::class, 'checkOut'
 
 Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/submit', [SubPekerjaanController::class, 'getSubmittedPersetujuan']);
 Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/reject', [SubPekerjaanController::class, 'getRejectedPersetujuan']);
+Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/valid/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getValidPersetujuan']);
 
 Route::post('notification/store', [NotificationController::class, 'store']);
 Route::get('notification', [NotificationController::class, 'index']);

@@ -276,4 +276,21 @@ class SubPekerjaanController extends Controller
             'data' => $tanggal
         ], 200);
     }
+
+    public function getValidPersetujuan($idUser, $dateFrom, $dateTo) {
+        $data = array();
+        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($idUser);
+        foreach($pekerjaans as $pekerjaan) {
+            $subPekerjaans = $this->subPekerjaanRepository->getValidSubPekerjaanByTanggal($pekerjaan->id, $dateFrom, $dateTo);
+            if($subPekerjaans->count() > 0 ) {
+                $pekerjaan['subPekerjaan'] = $subPekerjaans;
+                $data[] = $pekerjaan;
+            }
+        }
+        return response([
+            'success' => true,
+            'message' => 'List SubPekerjaan valid',
+            'data' => $data
+        ], 200);
+    }
 }

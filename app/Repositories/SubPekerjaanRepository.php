@@ -92,4 +92,9 @@ class SubPekerjaanRepository {
         return SubPekerjaan::where('status', 'reject')->
             where('id_pekerjaan', $id_pekerjaan)->count();
     }
+
+    public function getValidSubPekerjaanByTanggal($id_pekerjaan, $dateFrom, $dateTo) {
+        return SubPekerjaan::where('status', 'valid')->
+            where('id_pekerjaan', $id_pekerjaan)->whereBetween('tanggal', [$dateFrom, $dateTo . ' 23:59:59'])->get();
+    }
 }
