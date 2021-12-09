@@ -10,6 +10,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,3 +100,5 @@ Route::delete('notification/{id?}', [NotificationController::class, 'destroy']);
 Route::get('notification/pengguna/{id?}', [NotificationController::class, 'getNotificationByReceiverId']);
 Route::get('notification/{id?}/read', [NotificationController::class, 'updateNotificationRead']);
 Route::get('notification/pengguna/{id?}/count', [NotificationController::class, 'getNotificationUnreadByReceiverId']);
+
+Route::get('setting', [SettingController::class, 'index']);
