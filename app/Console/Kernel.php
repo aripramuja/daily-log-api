@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +26,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        //auto validasi sub pekerjaan
+        $schedule->call(function() {
+            DB::table('sub_pekerjaan')->where('tanggal', '>' ,'2021-12-19 00:00:00')
+            ->update(['status' => 'valid']);;
+        })->everyFiveMinutes();
     }
 
     /**
