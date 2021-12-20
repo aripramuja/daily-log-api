@@ -293,4 +293,37 @@ class SubPekerjaanController extends Controller
             'data' => $data
         ], 200);
     }
+
+    public function getDataTotalDurasiAllTimStaffByTanggal($idPengguna, $dateFrom, $dateTo) {
+        $id_tim = array();
+        $id_tim[] = $idPengguna;
+        $tims = $this->penggunaRepository->getAllPenggunaChild($idPengguna);
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+        $dateTo = $dateTo . ' 23:59:59';
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTimByTanggal($id_tim, $dateFrom, $dateTo);
+
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $tanggal
+        ], 200);
+    }
+
+    public function getDataTotalDurasiAllTimStaff1Hari($idPengguna, $dateFrom, $dateTo) {
+        $id_tim = array();
+        $id_tim[] = $idPengguna;
+        $tims = $this->penggunaRepository->getAllPenggunaChild($idPengguna);
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+        $dateTo = $dateTo . ' 23:59:59';
+        $tanggal = $this->subPekerjaanRepository->getDataTotalDurasiTim1Hari($id_tim, $dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $tanggal
+        ], 200);
+    }
 }

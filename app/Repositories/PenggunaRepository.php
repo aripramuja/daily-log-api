@@ -2,7 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Pengguna;
-
+use Illuminate\Support\Facades\DB;
 class PenggunaRepository {
     public function getAllPengguna() {
         return Pengguna::all();
@@ -44,11 +44,15 @@ class PenggunaRepository {
         return Pengguna::where('position_id', $id_position)->first();
     }
 
-    // public function getPenggunaStaff($id_position) {
-    //     return Pengguna::join('position', 'position.id', '=', 'user.position_id')->
-    //         select('user.id', 'username', 'jabatan', 'jabatan', 'position_id')->
-    //         where('position.parent_id', $id_position)->get();
-    // }
+    public function getAllPenggunaChild($id_user) {
+        $query =  DB::table('user')->where('atasan_id', $id_user)
+            ->unionAll(
+                DB::table('user')->select('user.*')
+                ->join('cte', 'cte.id', '=', 'user.atasan_id')
+            );
+
+            return DB::table('cte')->withRecursiveExpression('cte', $query)->get();
+    }
 
     public function getListStaff($id_user) {
         return Pengguna::where('atasan_id', $id_user)->get();

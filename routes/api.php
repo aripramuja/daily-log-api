@@ -60,6 +60,8 @@ Route::get('chart/pengguna/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPek
 Route::get('chart/tim/{idUser?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiTimByTanggal']);
 Route::get('chart/tim/{idUser?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiTim1Hari']);
 
+Route::get('chart/tim/all/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiAllTimStaff1Hari']);
+Route::get('chart/tim/all/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiAllTimStaffByTanggal']);
 Route::get('chart/tim/{idPosition?}/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiTimStaffByTanggal']);
 Route::get('chart/tim/{idPosition?}/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiTimStaff1Hari']);
 
