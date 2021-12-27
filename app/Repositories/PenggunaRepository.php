@@ -45,13 +45,13 @@ class PenggunaRepository {
     }
 
     public function getAllPenggunaChild($id_user) {
-        $query =  DB::table('user')->where('atasan_id', $id_user)
+        $query =  Pengguna::where('atasan_id', $id_user)
             ->unionAll(
-                DB::table('user')->select('user.*')
+                Pengguna::select('user.*')
                 ->join('cte', 'cte.id', '=', 'user.atasan_id')
             );
 
-            return DB::table('cte')->withRecursiveExpression('cte', $query)->get();
+            return Pengguna::from('cte')->withRecursiveExpression('cte', $query)->get();
     }
 
     public function getListStaff($id_user) {
