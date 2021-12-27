@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Staudenmeir\LaravelCte\Eloquent\QueriesExpressions;
+// use Staudenmeir\LaravelCte\Eloquent\QueriesExpressions;
 
 class Pengguna extends Model
 {
     use HasFactory;
-    use QueriesExpressions;
+    // use QueriesExpressions;
     protected $table = 'user';
     public $timestamps = false;
 
