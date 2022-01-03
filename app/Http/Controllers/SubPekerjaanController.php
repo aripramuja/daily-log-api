@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\KinerjaExport;
 use App\Repositories\PekerjaanRepository;
 use App\Repositories\PenggunaRepository;
 use App\Repositories\SubPekerjaanRepository;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SubPekerjaanController extends Controller
 {
@@ -325,5 +327,18 @@ class SubPekerjaanController extends Controller
             'message' => 'tanggal',
             'data' => $tanggal
         ], 200);
+    }
+
+    public function exportToExcel($idUser, $dateFrom, $dateTo) {
+        $data = array();
+        $pekerjaans = $this->pekerjaanRepository->getPekerjaanByIdUser($idUser);
+        foreach($pekerjaans as $pekerjaan) {
+            $subPekerjaans = $this->subPekerjaanRepository->getValidSubPekerjaanByTanggal($pekerjaan->id, $dateFrom, $dateTo);
+            if($subPekerjaans->count() > 0 ) {
+                $pekerjaan['subPekerjaan'] = $subPekerjaans;
+                $data[] = $pekerjaan;
+            }
+        }
+        return Excel::download(new KinerjaExport($data), 'tesExcel.xlsx');
     }
 }
