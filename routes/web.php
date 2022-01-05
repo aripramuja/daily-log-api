@@ -16,5 +16,3 @@ use App\Http\Controllers\SubPekerjaanController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/valid/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'exportToExcel']);

@@ -59,6 +59,7 @@ Route::get('pengguna/{id?}/subpekerjaan/{dateFrom?}/{dateTo?}/valid/count', [Sub
 Route::get('chart/pengguna/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiByTanggal']);
 Route::get('chart/tim/{idUser?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiTimByTanggal']);
 Route::get('chart/tim/{idUser?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiTim1Hari']);
+Route::get('pengguna/{idUser?}/persetujuan/subpekerjaan/valid/{dateFrom?}/{dateTo?}/download', [SubPekerjaanController::class, 'exportToExcel']);
 
 Route::get('chart/tim/all/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}/hari', [SubPekerjaanController::class, 'getDataTotalDurasiAllTimStaff1Hari']);
 Route::get('chart/tim/all/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getDataTotalDurasiAllTimStaffByTanggal']);
