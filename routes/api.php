@@ -105,3 +105,4 @@ Route::get('notification/{id?}/read', [NotificationController::class, 'updateNot
 Route::get('notification/pengguna/{id?}/count', [NotificationController::class, 'getNotificationUnreadByReceiverId']);
 
 Route::get('setting', [SettingController::class, 'index']);
+Route::get('piechart/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getSumDurasiPekerjaanStaff']);

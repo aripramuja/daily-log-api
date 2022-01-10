@@ -341,4 +341,18 @@ class SubPekerjaanController extends Controller
         }
         return Excel::download(new KinerjaExport($data), 'tesExcel.xlsx');
     }
+
+    public function getSumDurasiPekerjaanStaff($idPengguna, $dateFrom, $dateTo) {
+        $id_tim = array();
+        $tims = $this->penggunaRepository->getListStaff($idPengguna);
+        foreach($tims as $tim) {
+            $id_tim[] = $tim->id;
+        }
+        $subPekerjaan = $this->subPekerjaanRepository->getSumDurasiPekerjaanStaff($id_tim, $dateFrom, $dateTo);
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $subPekerjaan
+        ], 200);
+    }
 }
