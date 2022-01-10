@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\SubPekerjaan;
+use Illuminate\Support\Facades\DB;
 
 class SubPekerjaanRepository {
     public function getAllSubPekerjaan() {
@@ -96,5 +97,13 @@ class SubPekerjaanRepository {
     public function getValidSubPekerjaanByTanggal($id_pekerjaan, $dateFrom, $dateTo) {
         return SubPekerjaan::where('status', 'valid')->
             where('id_pekerjaan', $id_pekerjaan)->whereBetween('tanggal', [$dateFrom, $dateTo . ' 23:59:59'])->get();
+    }
+
+    public function getSumDurasiPekerjaanStaff($id_staff, $dateFrom, $dateTo) {
+        return DB::table('sub_pekerjaan')->where('status', '=', 'valid')->whereBetween('sub_pekerjaan.tanggal', [$dateFrom, $dateTo . ' 23:59:59'])
+        ->whereIn('sub_pekerjaan.id_user', $id_staff)
+        ->join('pekerjaan', 'sub_pekerjaan.id_pekerjaan', '=', 'pekerjaan.id')
+        ->selectRaw('pekerjaan.nama, SUM(durasi) as durasi')->
+        groupByRaw('pekerjaan.nama')->get();
     }
 }
