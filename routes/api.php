@@ -106,3 +106,4 @@ Route::get('notification/pengguna/{id?}/count', [NotificationController::class, 
 
 Route::get('setting', [SettingController::class, 'index']);
 Route::get('piechart/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getSumDurasiPekerjaanStaff']);
+Route::get('kinerja/{id_user?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getLaporanKinerjaPenggunaByTanggal']);
