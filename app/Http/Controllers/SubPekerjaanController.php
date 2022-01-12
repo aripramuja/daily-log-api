@@ -355,4 +355,34 @@ class SubPekerjaanController extends Controller
             'data' => $subPekerjaan
         ], 200);
     }
+
+    public function getLaporanKinerjaPenggunaByTanggal($id_user, $dateFrom, $dateTo) {
+        $data = array();
+        $subPekerjaans = $this->subPekerjaanRepository->getLaporanKinerjaByTanggal($id_user, $dateFrom, $dateTo);
+
+        if($subPekerjaans->isNotEmpty()) {
+            $firstDate = $subPekerjaans->first()->tanggal;
+            $date=date_create($firstDate);
+            $lastDate = date_format($date,"Y-m-d");
+            $listPekerjaan = array();
+
+            foreach($subPekerjaans as $subPekerjaan) {
+                $dates=date_create($subPekerjaan->tanggal);
+            $formatDate = date_format($dates,"Y-m-d");
+                if($formatDate == $lastDate) {
+                    $listPekerjaan[] = $subPekerjaan;
+                } else {
+                    $data[] = array("tanggal" => $lastDate, "subpekerjaan" => $listPekerjaan);
+                    $listPekerjaan = array();
+                    $listPekerjaan[] = $subPekerjaan;
+                    $lastDate = $formatDate;
+                }
+            }
+        }
+        return response([
+            'success' => true,
+            'message' => 'tanggal',
+            'data' => $data
+        ], 200);
+    }
 }

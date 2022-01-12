@@ -106,4 +106,11 @@ class SubPekerjaanRepository {
         ->selectRaw('pekerjaan.nama, SUM(durasi) as durasi')->
         groupByRaw('pekerjaan.nama')->get();
     }
+
+    public function getLaporanKinerjaByTanggal($id_user, $dateFrom, $dateTo) {
+        return DB::table('sub_pekerjaan')->where('status', '=', 'valid')->whereBetween('sub_pekerjaan.tanggal', [$dateFrom, $dateTo . ' 23:59:59'])
+        ->where('sub_pekerjaan.id_user', $id_user)
+        ->join('pekerjaan', 'sub_pekerjaan.id_pekerjaan', '=', 'pekerjaan.id')
+        ->selectRaw('sub_pekerjaan.*, pekerjaan.nama as nama_pekerjaan')->orderBy('sub_pekerjaan.tanggal')->get();
+    }
 }
