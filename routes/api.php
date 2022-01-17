@@ -11,6 +11,7 @@ use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\PengumumanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,3 +108,9 @@ Route::get('notification/pengguna/{id?}/count', [NotificationController::class, 
 Route::get('setting', [SettingController::class, 'index']);
 Route::get('piechart/{idPengguna?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getSumDurasiPekerjaanStaff']);
 Route::get('kinerja/{id_user?}/tanggal/{dateFrom?}/{dateTo?}', [SubPekerjaanController::class, 'getLaporanKinerjaPenggunaByTanggal']);
+
+Route::post('pengumuman/store', [PengumumanController::class, 'store']);
+Route::get('pengumuman', [PengumumanController::class, 'index']);
+Route::get('pengumuman/{id?}', [PengumumanController::class, 'show']);
+Route::post('pengumuman/update', [PengumumanController::class, 'update']);
+Route::delete('pengumuman/{id?}', [PengumumanController::class, 'destroy']);
