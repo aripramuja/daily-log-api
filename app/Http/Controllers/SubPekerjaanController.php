@@ -378,6 +378,7 @@ class SubPekerjaanController extends Controller
                     $lastDate = $formatDate;
                 }
             }
+            $data[] = array("tanggal" => $lastDate, "subpekerjaan" => $listPekerjaan);
         }
         return response([
             'success' => true,
